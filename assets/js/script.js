@@ -56,21 +56,55 @@ console.log(lat);
 lon= data.coord.lon;
 console.log(lon);
 
-getfiveday();
+getfiveday(lat,lon);
 
 })
 
 }
 
-function getfiveday(){
+function getfiveday(lat,lon){
 
-var baseUrl= `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,current&appid=${apiKey}&units=imperial`
+var baseUrl= `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+
 
 console.log(baseUrl);
 fetch(baseUrl).then(function(response){
     return response.json();
 }).then(function(data){
 console.log(data);
+
+for(var i=0;i<5;i++){
+
+var date= new Date((data.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
+
+var temp=data.list[i].main.temp;
+var wind=data.list[i].wind.speed;
+var hum=data.list[i].main.humidity;
+
+var fDiv= $("<dvi>").attr("class","5day");
+var fh3=$("<h3>").text(date);
+var ftemp=$("<p>").text(temp);
+var fwind=$("<p>").text(wind);
+var fhum=$("<p>").text(hum);
+
+$("#forecast").append(fDiv);
+fDiv.append(fh3);
+fDiv.append(ftemp);
+fDiv.append(fwind);
+fDiv.append(fhum);
+
+console.log(date);
+console.log(temp);
+console.log(wind);
+console.log(hum);
+
+
+
+
+}
+
+
+
 })
 
 
