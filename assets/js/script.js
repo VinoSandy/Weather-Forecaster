@@ -17,7 +17,7 @@ $("#search-button").on("click", function( event ){
 
     console.log("cityname:"+cityName);
 
-    addCity();
+    
     getCurrentWeather();
 
 
@@ -29,6 +29,8 @@ $("#search-button").on("click", function( event ){
 
 
 function getCurrentWeather(){
+
+ $("#today").empty();   
 
 var queryUrl= `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
 
@@ -54,8 +56,6 @@ p3El.text(` WindSpeed:${data.wind.speed}`);
 
 $("#today").append(cityEl);
 $(divEl).append(p1El,p2El,p3El);
-//$(divEl).append(p2El);
-//$(divEl).append(p3El);
 $("#today").append(divEl);
 
 lat= data.coord.lat;
@@ -71,11 +71,13 @@ getfiveday(lat,lon);
 
 function getfiveday(lat,lon){
 
+    $("#forecast").empty();
 var baseUrl= `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
 
 
 console.log(baseUrl);
 fetch(baseUrl).then(function(response){
+    checkPast();
     return response.json();
 }).then(function(data){
 console.log(data);
@@ -133,3 +135,30 @@ $("#history").on("click",function (event) {
     getCurrentWeather();
   });
 
+  function checkPast () {
+    if ( $(`#history button[data-city="${cityName}"]`).length ) { 
+      $("#search-input").val("");
+    } else {
+      addCity();
+      savedCities.push(cityName);
+      localStorage.setItem("cities", JSON.stringify(savedCities))
+    }
+  }
+
+  function loadCities() {
+    var storedCities = JSON.parse(localStorage.getItem("cities"));
+    if (storedCities !== null) {
+      savedCities = storedCities;
+      renderCities();
+    } else {
+      cityName = "London"
+      checkPast();
+    }
+  }
+
+  function renderCities() {
+    for (var i = 0; i < savedCities.length; i++) {
+      cityName = savedCities[i];
+      addCity();
+    }
+  }

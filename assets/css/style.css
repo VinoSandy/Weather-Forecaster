@@ -15,6 +15,7 @@ header.weather-header {
 form{
     display: flex; 
     flex-direction: column;
+    justify-content: start;
 
 }
 
