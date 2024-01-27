@@ -1,3 +1,31 @@
+
+header.weather-header {
+    font-size: 20px;
+    font-weight: bold;
+    background: blueviolet;
+     color: aliceblue;
+
+  }
+  
+  header.weather-header h1 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+form{
+    display: flex; 
+    flex-direction: column;
+
+}
+
+#today{
+    max-width: 600px; 
+    margin: 0 auto; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    background-color: white;      
+}
+
 #forecast {
     display: flex;
     justify-content: space-between; /* Adjust as needed */

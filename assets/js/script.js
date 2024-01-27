@@ -4,6 +4,7 @@ var apiKey="ef1738abb13dc5a851688dce2a078c86"
 var cityName ;
 var lat;
 var lon;
+var savedCities=[];
 var currentDate = dayjs().format('dddd, MMMM D, YYYY');
 console.log(currentDate);
 
@@ -16,6 +17,7 @@ $("#search-button").on("click", function( event ){
 
     console.log("cityname:"+cityName);
 
+    addCity();
     getCurrentWeather();
 
 
@@ -35,7 +37,7 @@ fetch(queryUrl).then(function(response){
 }).then(function(data){
 console.log(data);
 var cityEl= $("<h1>");
-var divEl=$("<div>");
+var divEl=$("<div>")
 var p1El=$("<p>");
 var p2El=$("<p>");
 var p3El=$("<p>");
@@ -94,7 +96,7 @@ fDiv.css({
     'padding': '10px',
     'margin': '10px',
     'width': '150px',
-    'background-color': 'blue', 
+    'background-color': 'blueviolet',
      'color': 'white',
     'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)'
 });
@@ -112,15 +114,22 @@ console.log(temp);
 console.log(wind);
 console.log(hum);
 
-
-
-
 }
-
-
 
 })
-
-
-
 }
+
+function addCity(){
+    var cityBtn=$("<button>");
+    cityBtn.attr("type", "button").attr("data-city", cityName);
+    cityBtn.text(cityName);
+    $("#history").append(cityBtn);
+    $("#search-input").val("");
+}
+
+$("#history").on("click",function (event) {
+    event.preventDefault();
+    cityName = $(this).attr("data-city");
+    getCurrentWeather();
+  });
+
