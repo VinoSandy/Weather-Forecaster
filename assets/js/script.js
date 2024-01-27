@@ -39,16 +39,21 @@ var divEl=$("<div>");
 var p1El=$("<p>");
 var p2El=$("<p>");
 var p3El=$("<p>");
+var imgEl=$("<img>");
 
+var weathericon=data.weather[0].icon;
+var iconUrl="https://openweathermap.org/img/wn/"+weathericon +"@2x.png";
+imgEl.attr("src",iconUrl);
 cityEl.text(`${cityName}-${currentDate}`);
+cityEl.append(imgEl);
 p1El.text(`Humidity: ${data.main.humidity}`);
 p2El.text( `Temperature:${data.main.temp}`);
 p3El.text(` WindSpeed:${data.wind.speed}`);
 
 $("#today").append(cityEl);
-$(divEl).append(p1El);
-$(divEl).append(p2El);
-$(divEl).append(p3El);
+$(divEl).append(p1El,p2El,p3El);
+//$(divEl).append(p2El);
+//$(divEl).append(p3El);
 $("#today").append(divEl);
 
 lat= data.coord.lat;
@@ -82,16 +87,25 @@ var wind=data.list[i].wind.speed;
 var hum=data.list[i].main.humidity;
 
 var fDiv= $("<dvi>").attr("class","5day");
+
+fDiv.css({
+    'border': '1px solid #ccc',
+    'border-radius': '8px',
+    'padding': '10px',
+    'margin': '10px',
+    'width': '150px',
+    'background-color': 'blue', 
+     'color': 'white',
+    'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)'
+});
+
 var fh3=$("<h3>").text(date);
 var ftemp=$("<p>").text(temp);
 var fwind=$("<p>").text(wind);
 var fhum=$("<p>").text(hum);
 
 $("#forecast").append(fDiv);
-fDiv.append(fh3);
-fDiv.append(ftemp);
-fDiv.append(fwind);
-fDiv.append(fhum);
+fDiv.append(fh3,ftemp,fwind,fhum);
 
 console.log(date);
 console.log(temp);
