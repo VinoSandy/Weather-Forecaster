@@ -2,6 +2,8 @@
 
 var apiKey="ef1738abb13dc5a851688dce2a078c86"
 var cityName ;
+var lat;
+var lon;
 var currentDate = dayjs().format('dddd, MMMM D, YYYY');
 console.log(currentDate);
 
@@ -37,9 +39,8 @@ var divEl=$("<div>");
 var p1El=$("<p>");
 var p2El=$("<p>");
 var p3El=$("<p>");
-var weathericon=data.weather[0].icon ;
 
-cityEl.text(`${cityName}-${currentDate}${weathericon} `);
+cityEl.text(`${cityName}-${currentDate}`);
 p1El.text(`Humidity: ${data.main.humidity}`);
 p2El.text( `Temperature:${data.main.temp}`);
 p3El.text(` WindSpeed:${data.wind.speed}`);
@@ -50,8 +51,28 @@ $(divEl).append(p2El);
 $(divEl).append(p3El);
 $("#today").append(divEl);
 
+lat= data.coord.lat;
+console.log(lat);
+lon= data.coord.lon;
+console.log(lon);
 
+getfiveday();
 
 })
+
+}
+
+function getfiveday(){
+
+var baseUrl= `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,current&appid=${apiKey}&units=imperial`
+
+console.log(baseUrl);
+fetch(baseUrl).then(function(response){
+    return response.json();
+}).then(function(data){
+console.log(data);
+})
+
+
 
 }
