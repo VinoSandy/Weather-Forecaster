@@ -18,7 +18,7 @@ $("#search-button").on("click", function( event ){
     console.log("cityname:"+cityName);
 
     
-    getCurrentWeather();
+    getCurrentWeather(cityName);
 
 
    }
@@ -28,7 +28,7 @@ $("#search-button").on("click", function( event ){
 
 
 
-function getCurrentWeather(){
+function getCurrentWeather(cityName){
 
  $("#today").empty();   
 
@@ -132,12 +132,13 @@ function addCity(){
 $("#history").on("click",function (event) {
     event.preventDefault();
     cityName = $(this).attr("data-city");
-    getCurrentWeather();
+    getCurrentWeather(cityName);
   });
 
   function checkPast () {
     if ( $(`#history button[data-city="${cityName}"]`).length ) { 
       $("#search-input").val("");
+     
     } else {
       addCity();
       savedCities.push(cityName);
@@ -162,3 +163,5 @@ $("#history").on("click",function (event) {
       addCity();
     }
   }
+  loadCities();
+  
