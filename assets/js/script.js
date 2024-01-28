@@ -11,6 +11,11 @@ console.log(currentDate);
 
 $("#search-button").on("click", function( event ){
    event.preventDefault();
+   
+   //localStorage.clear();
+   //savedCities = [];
+   //$("#history").empty();
+
    if($("#search-input").val() !== "" ){
 
     cityName = $("#search-input").val();
@@ -34,7 +39,8 @@ function getCurrentWeather(cityName){
 
 var queryUrl= `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
 
-fetch(queryUrl).then(function(response){
+fetch(queryUrl).then(function(response ){
+    checkPast();
     return response.json();
 }).then(function(data){
 console.log(data);
@@ -77,7 +83,6 @@ var baseUrl= `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${
 
 console.log(baseUrl);
 fetch(baseUrl).then(function(response){
-    checkPast();
     return response.json();
 }).then(function(data){
 console.log(data);
@@ -123,13 +128,13 @@ console.log(hum);
 
 function addCity(){
     var cityBtn=$("<button>");
-    cityBtn.attr("type", "button").attr("data-city", cityName);
+    cityBtn.attr("type", "button").attr("data-city", cityName).attr("class", "past");
     cityBtn.text(cityName);
     $("#history").append(cityBtn);
     $("#search-input").val("");
 }
 
-$("#history").on("click",function (event) {
+$("#history").on("click",".past",function (event) {
     event.preventDefault();
     cityName = $(this).attr("data-city");
     getCurrentWeather(cityName);
@@ -164,4 +169,3 @@ $("#history").on("click",function (event) {
     }
   }
   loadCities();
-  
