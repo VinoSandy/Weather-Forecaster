@@ -1,14 +1,14 @@
 
-
+/* Sets api key and current date  */
 var apiKey="ef1738abb13dc5a851688dce2a078c86"
 var cityName ;
 var lat;
 var lon;
 var savedCities=[];
 var currentDate = dayjs().format('dddd, MMMM D, YYYY');
-console.log(currentDate);
 
 
+/* when submit button is clicked ,displays current weather and 5 day forecast for user city input. */
 $("#search-button").on("click", function( event ){
    event.preventDefault();
    
@@ -19,10 +19,7 @@ $("#search-button").on("click", function( event ){
    if($("#search-input").val() !== "" ){
 
     cityName = $("#search-input").val();
-
-    console.log("cityname:"+cityName);
-
-    
+      
     getCurrentWeather(cityName);
 
 
@@ -32,7 +29,7 @@ $("#search-button").on("click", function( event ){
 
 
 
-
+/* Function to display current weather details*/
 function getCurrentWeather(cityName){
 
  $("#today").empty();   
@@ -43,7 +40,8 @@ fetch(queryUrl).then(function(response ){
     checkPast();
     return response.json();
 }).then(function(data){
-console.log(data);
+
+/*Dynamically creates HTML elements to display values in the browser */    
 var cityEl= $("<h2>");
 var divEl=$("<div>")
 var p1El=$("<p>");
@@ -72,9 +70,8 @@ $(divEl).append(p1El,p2El,p3El);
 $("#today").append(divEl);
 
 lat= data.coord.lat;
-console.log(lat);
 lon= data.coord.lon;
-console.log(lon);
+
 
 getfiveday(lat,lon);
 
@@ -82,17 +79,18 @@ getfiveday(lat,lon);
 
 }
 
+/*Function to display next five day's weather Forecast */
+
 function getfiveday(lat,lon){
 
-    $("#forecast").empty();
+ $("#forecast").empty();
 var baseUrl= `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
 
 
-console.log(baseUrl);
 fetch(baseUrl).then(function(response){
     return response.json();
 }).then(function(data){
-console.log(data);
+
 
 for(var i=0;i<5;i++){
 
@@ -126,15 +124,13 @@ var fimg= $("<img src="+iconurl+">");
 $("#forecast").append(fDiv);
 fDiv.append(fimg,fh3,ftemp,fwind,fhum);
 
-console.log(date);
-console.log(temp);
-console.log(wind);
-console.log(hum);
 
 }
 
 })
 }
+
+/*Adds new button in the browser based on search history dynamically */
 
 function addCity(){
     var cityBtn=$("<button>");
@@ -144,12 +140,14 @@ function addCity(){
     $("#search-input").val("");
 }
 
+/* When saved city button is clicked , displays weather details and 5 day forecast for corresponding city*/
 $("#history").on("click",".past",function (event) {
     event.preventDefault();
     cityName = $(this).attr("data-city");
     getCurrentWeather(cityName);
   });
 
+  /*Checks user input , if is not in city history , adds the new city to local storage and creates new button */
   function checkPast () {
     if ( $(`#history button[data-city="${cityName}"]`).length ) { 
       $("#search-input").val("");
@@ -161,6 +159,7 @@ $("#history").on("click",".past",function (event) {
     }
   }
 
+  /*Renders city name from local storage */
   function loadCities() {
     var storedCities = JSON.parse(localStorage.getItem("cities"));
     if (storedCities !== null) {
