@@ -56,9 +56,9 @@ var iconUrl="https://openweathermap.org/img/wn/"+weathericon +"@2x.png";
 imgEl.attr("src",iconUrl);
 cityEl.text(`${cityName}-${currentDate}`);
 cityEl.append(imgEl);
-p1El.text(`Humidity: ${data.main.humidity}`);
-p2El.text( `Temperature:${data.main.temp}`);
-p3El.text(` WindSpeed:${data.wind.speed}`);
+p1El.text(`Humidity: ${data.main.humidity} KPH`);
+p2El.text( `Temperature:${((data.main.temp-32)*5/9).toFixed(2)} °C`);
+p3El.text(` WindSpeed:${data.wind.speed} %`);
 
 $("#today").append(cityEl);
 $(divEl).append(p1El,p2El,p3El);
@@ -91,10 +91,12 @@ for(var i=0;i<5;i++){
 
 var date= new Date((data.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
 
-var temp=data.list[i].main.temp;
-var wind=data.list[i].wind.speed;
-var hum=data.list[i].main.humidity;
-
+var temp=data.list[((i+1)*8)-1].main.temp;
+var tempC= (temp - 273.15).toFixed(2);
+var wind=data.list[((i+1)*8)-1].wind.speed;
+var hum=data.list[((i+1)*8)-1].main.humidity;
+var iconcode= data.list[((i+1)*8)-1].weather[0].icon;
+var iconurl="https://openweathermap.org/img/wn/"+iconcode+".png";
 var fDiv= $("<dvi>").attr("class","5day");
 
 fDiv.css({
@@ -109,12 +111,13 @@ fDiv.css({
 });
 
 var fh3=$("<h3>").text(date);
-var ftemp=$("<p>").text(temp);
-var fwind=$("<p>").text(wind);
-var fhum=$("<p>").text(hum);
+var ftemp=$("<p>").text(tempC+ "°C");
+var fwind=$("<p>").text(wind+ "KPH");
+var fhum=$("<p>").text(hum+ "%");
+var fimg= $("<img src="+iconurl+">");
 
 $("#forecast").append(fDiv);
-fDiv.append(fh3,ftemp,fwind,fhum);
+fDiv.append(fimg,fh3,ftemp,fwind,fhum);
 
 console.log(date);
 console.log(temp);

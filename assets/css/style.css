@@ -2,7 +2,7 @@
 header.weather-header {
     font-size: 20px;
     font-weight: bold;
-    background: blueviolet;
+    background: rgb(38, 17, 115) !important;
      color: aliceblue;
 
   }
@@ -12,18 +12,12 @@ header.weather-header {
     margin-bottom: 10px;
   }
   
-form{
-    display: flex; 
-    flex-direction: column;
-    justify-content: start;
-
-}
 
 #today{
     max-width: 600px; 
     margin: 0 auto; 
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 0 10px rgba(113, 92, 177, 0.144); 
     background-color: white;      
 }
 
