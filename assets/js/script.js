@@ -51,6 +51,13 @@ var p2El=$("<p>");
 var p3El=$("<p>");
 var imgEl=$("<img>");
 
+
+$("#today").css({ 'border': '1px solid #ccc',
+    'border-radius': '8px',      
+    'padding': '10px',          
+    'margin': '10px',           
+    'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)'})
+
 var weathericon=data.weather[0].icon;
 var iconUrl="https://openweathermap.org/img/wn/"+weathericon +"@2x.png";
 imgEl.attr("src",iconUrl);
