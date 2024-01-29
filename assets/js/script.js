@@ -63,9 +63,9 @@ var iconUrl="https://openweathermap.org/img/wn/"+weathericon +"@2x.png";
 imgEl.attr("src",iconUrl);
 cityEl.text(`${cityName}-${currentDate}`);
 cityEl.append(imgEl);
-p1El.text(`Humidity: ${data.main.humidity} KPH`);
+p1El.text(`Humidity: ${data.main.humidity} %`);
 p2El.text( `Temperature:${((data.main.temp-32)*5/9).toFixed(2)} °C`);
-p3El.text(` WindSpeed:${data.wind.speed} %`);
+p3El.text(` WindSpeed:${data.wind.speed} KPH`);
 
 $("#today").append(cityEl);
 $(divEl).append(p1El,p2El,p3El);
@@ -118,9 +118,9 @@ fDiv.css({
 });
 
 var fh3=$("<h4>").text(date);
-var ftemp=$("<p>").text(tempC+ "°C");
-var fwind=$("<p>").text(wind+ "KPH");
-var fhum=$("<p>").text(hum+ "%");
+var ftemp=$("<p>").text("Temp:" +tempC+ "°C");
+var fwind=$("<p>").text("Wind:" +wind+ "%");
+var fhum=$("<p>").text("Humidity:" +hum+ "KPH");
 var fimg= $("<img src="+iconurl+">");
 
 $("#forecast").append(fDiv);
