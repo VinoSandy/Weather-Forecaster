@@ -44,7 +44,7 @@ fetch(queryUrl).then(function(response ){
     return response.json();
 }).then(function(data){
 console.log(data);
-var cityEl= $("<h1>");
+var cityEl= $("<h2>");
 var divEl=$("<div>")
 var p1El=$("<p>");
 var p2El=$("<p>");
@@ -105,12 +105,12 @@ fDiv.css({
     'padding': '10px',
     'margin': '10px',
     'width': '150px',
-    'background-color': 'blueviolet',
+    'background-color': 'rgb(38, 17, 115) ',
      'color': 'white',
     'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)'
 });
 
-var fh3=$("<h3>").text(date);
+var fh3=$("<h4>").text(date);
 var ftemp=$("<p>").text(tempC+ "°C");
 var fwind=$("<p>").text(wind+ "KPH");
 var fhum=$("<p>").text(hum+ "%");

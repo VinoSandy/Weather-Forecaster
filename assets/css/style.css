@@ -14,15 +14,16 @@ header.weather-header {
   
 
 #today{
-    max-width: 600px; 
-    margin: 0 auto; 
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(113, 92, 177, 0.144); 
-    background-color: white;      
+       
+    border: 1px solid #ccc;
+    border-radius: 8px;      
+    padding: 10px;          
+    margin: 10px;           
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #forecast {
     display: flex;
-    justify-content: space-between; /* Adjust as needed */
+    justify-content: space-between; 
 }
 
