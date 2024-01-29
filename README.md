@@ -31,6 +31,15 @@
     * The humidity
   * When a user click on a city in the search history they are again presented with current and future conditions for that city.
 
+ 
+  ## Git Hub URL:
+     https://github.com/VinoSandy/Weather-Forecaster.git
+
+  ## URL of Deployed application:
+     https://vinosandy.github.io/Weather-Forecaster/
+     
+     
+
   ### Reference Used:
       * https://stackoverflow.com/questions/67608863/how-to-display-openweathermap-icons-in-weather-application
       * https://sentry.io/answers/convert-unix-timestamp-to-date-and-time-in-javascript/
@@ -38,12 +47,4 @@
       * https://www.w3schools.com/js/js_jquery_elements.asp
       * https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
       * https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys
-
-
-
-  ## Git Hub URL:
-     https://github.com/VinoSandy/Weather-Forecaster.git
-
-  ## URL of Deployed application:
-     
-     
+    
